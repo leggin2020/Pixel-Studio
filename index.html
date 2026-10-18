@@ -90,7 +90,7 @@
           <span class="empty-footnote">Runs locally in your browser · your files stay on this device</span>
         </div>
         <div class="stage-shell hidden" id="stageShell">
-          <div class="stage-checker" id="stageChecker"><canvas id="artCanvas" width="256" height="256"></canvas><canvas class="selection-overlay" id="selectionOverlay" aria-hidden="true"></canvas><canvas class="selection-ants" id="selectionAnts" aria-hidden="true"></canvas><canvas class="drawing-overlay" id="drawingOverlay" aria-hidden="true"></canvas><div class="brush-cursor" id="brushCursor" aria-hidden="true"></div><div class="selection-box hidden" id="selectionBox"></div></div>
+          <div class="stage-checker" id="stageChecker"><canvas id="artCanvas" width="256" height="256"></canvas><canvas class="selection-overlay" id="selectionOverlay" aria-hidden="true"></canvas><svg class="selection-ants" id="selectionAnts" aria-hidden="true" preserveAspectRatio="none"><path class="ants-light" id="selectionAntsLight"/><path class="ants-dark" id="selectionAntsDark"/></svg><canvas class="drawing-overlay" id="drawingOverlay" aria-hidden="true"></canvas><div class="brush-cursor" id="brushCursor" aria-hidden="true"></div><div class="selection-box hidden" id="selectionBox"></div></div>
         </div>
         <div class="canvas-hint" id="canvasHint"><span class="hint-key">Drag</span> Pan at zoom <span class="hint-sep">·</span><span class="hint-key">Alt</span> + drag moves layer <span class="hint-sep">·</span><span class="hint-key">Space</span> + drag</div>
       </div>
