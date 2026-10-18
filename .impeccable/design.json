@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-17T00:00:00Z",
+  "title": "Design System: Sprite-Studio",
+  "extensions": {
+    "colorMeta": {
+      "canvas-ground": { "role": "workspace background", "displayName": "Canvas Ground" },
+      "panel-surface": { "role": "primary panel", "displayName": "Graphite Panel" },
+      "accent-clay": { "role": "action and selection", "displayName": "Warm Clay" },
+      "preview-paper": { "role": "transparency checker", "displayName": "Preview Paper" }
+    },
+    "shadows": [
+      { "name": "canvas-preview", "value": "0 10px 28px rgba(8, 10, 8, 0.56)", "purpose": "Lift the artwork preview away from the workspace ground." },
+      { "name": "dialog", "value": "0 18px 60px rgba(9, 11, 9, 0.67)", "purpose": "Separate the keyboard-shortcut dialog from the editor." }
+    ],
+    "motion": [
+      { "name": "control-feedback", "value": "150ms ease", "purpose": "Give hover and selected controls a quick, quiet response." }
+    ],
+    "breakpoints": [
+      { "name": "compact-editor", "value": "1100px" },
+      { "name": "narrow-editor", "value": "850px" }
+    ]
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "The maker's bench",
+    "overview": "A compact, calm editing surface where sprite artwork stays in focus. Graphite panels reduce glare; clay accents identify active tools and key actions.",
+    "keyCharacteristics": [
+      "Dark work surfaces with tonal separation",
+      "Warm clay for active and primary actions",
+      "Light neutral transparency checkerboard",
+      "Central canvas with nearby controls"
+    ],
+    "rules": [
+      { "name": "The Artifact-First Rule", "body": "Keep the canvas visually central; editor chrome supports the work.", "section": "overview" },
+      { "name": "The Clay Signal Rule", "body": "Reserve clay for a primary action, selected state, or meaningful focus.", "section": "colors" }
+    ],
+    "dos": [
+      "Keep dimensions and frame indices in monospace.",
+      "Pair selection color with a visible outline."
+    ],
+    "donts": [
+      "Do not use the Palomin sample character as decoration on unrelated projects.",
+      "Do not add heavy shadows to every panel."
+    ]
+  }
+}

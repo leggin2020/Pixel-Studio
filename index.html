@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171a18">
+  <meta name="description" content="Sprite Studio is a local frame-by-frame PNG editor with animation preview and folder export.">
+  <link rel="icon" type="image/svg+xml" href="./public/sprite-studio-icon.svg">
+  <title>Sprite Studio</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Sprite Studio home"><span class="brand-mark"><svg viewBox="0 0 32 32"><path d="M7 6h18v20H7zM11 11h10M11 16h10M11 21h6"/></svg></span><span>sprite<span class="brand-light">studio</span></span></a>
+    <span class="top-divider"></span>
+    <div class="project-title"><strong id="projectName">Untitled project</strong><span class="saved-state"><i></i><span id="saveState">Local workspace</span></span></div>
+    <div class="top-actions">
+      <button class="quiet-button" id="openProjectBtn"><svg data-icon="folder"></svg><span>Open folder</span></button>
+      <button class="export-button" id="exportBtn"><svg data-icon="export"></svg><span>Export sprites</span></button>
+      <input id="folderInput" type="file" webkitdirectory directory multiple hidden>
+      <input id="filesInput" type="file" accept=".png,.json,image/png,application/json" multiple hidden>
+    </div>
+  </header>
+  <main class="workspace">
+    <aside class="tool-rail" aria-label="Editing tools">
+      <div class="tool-shelf">
+        <div class="tool-tabs" role="tablist" aria-label="Tool categories">
+          <button class="tool-tab active" id="toolTabCanvas" type="button" role="tab" aria-selected="true" aria-controls="toolPageCanvas" data-tool-tab="canvas">Canvas</button>
+          <button class="tool-tab" id="toolTabSelect" type="button" role="tab" aria-selected="false" aria-controls="toolPageSelect" data-tool-tab="select">Select</button>
+          <button class="tool-tab" id="toolTabPaint" type="button" role="tab" aria-selected="false" aria-controls="toolPagePaint" data-tool-tab="paint">Paint</button>
+          <button class="tool-tab" id="toolTabShape" type="button" role="tab" aria-selected="false" aria-controls="toolPageShape" data-tool-tab="shape">Shape</button>
+        </div>
+        <div class="tool-pages">
+          <div class="tool-page" id="toolPageCanvas" role="tabpanel" aria-labelledby="toolTabCanvas" data-tool-page="canvas">
+            <button class="tool active" data-tool="move" title="Move (V)"><svg data-icon="move"></svg><span>Move</span><kbd>V</kbd></button>
+            <button class="tool" data-tool="hand" title="Hand / pan (H)"><svg data-icon="hand"></svg><span>Hand</span><kbd>H</kbd></button>
+            <button class="tool" data-tool="crop" title="Crop selection (C)"><svg data-icon="crop"></svg><span>Crop</span><kbd>C</kbd></button>
+          </div>
+          <div class="tool-page hidden" id="toolPageSelect" role="tabpanel" aria-labelledby="toolTabSelect" data-tool-page="select" aria-hidden="true">
+            <button class="tool" data-tool="wand" title="Magic Wand · select contiguous pixels (W, Shift adds, Alt subtracts)"><svg data-icon="wand"></svg><span>Magic Wand</span><kbd>W</kbd></button>
+            <button class="tool" data-tool="select" title="Rectangle Select (M)"><svg data-icon="select"></svg><span>Rectangle Select</span><kbd>M</kbd></button>
+            <button class="tool" data-tool="ellipse-select" title="Ellipse Select (Shift+M)"><svg data-icon="ellipse"></svg><span>Ellipse Select</span><kbd>⇧M</kbd></button>
+            <button class="tool" data-tool="lasso" title="Freehand Lasso (L)"><svg data-icon="lasso"></svg><span>Lasso</span><kbd>L</kbd></button>
+            <button class="tool" data-tool="polygon-lasso" title="Polygon Lasso · click points, Enter or double-click to close"><svg data-icon="polygon-lasso"></svg><span>Polygon Lasso</span><kbd></kbd></button>
+            <button class="tool" data-tool="magnetic-lasso" title="Magnetic Lasso · drag along a high-contrast edge"><svg data-icon="magnetic-lasso"></svg><span>Magnetic Lasso</span><kbd></kbd></button>
+          </div>
+          <div class="tool-page hidden" id="toolPagePaint" role="tabpanel" aria-labelledby="toolTabPaint" data-tool-page="paint" aria-hidden="true">
+            <button class="tool" data-tool="smooth" title="Drag a region to remove tiny stray pixels and smooth translucent edges"><svg data-icon="sparkle"></svg><span>Smooth</span></button>
+            <button class="tool" data-tool="pencil" title="Pencil (B)"><svg data-icon="pencil"></svg><span>Pencil</span><kbd>B</kbd></button>
+            <button class="tool" data-tool="brush" title="Brush"><svg data-icon="brush"></svg><span>Brush</span><kbd></kbd></button>
+            <button class="tool" data-tool="eraser" title="Eraser (E)"><svg data-icon="eraser"></svg><span>Eraser</span><kbd>E</kbd></button>
+            <button class="tool" data-tool="fill" title="Paint bucket: fill contiguous color or transparent area (G)"><svg data-icon="fill"></svg><span>Bucket</span><kbd>G</kbd></button>
+            <button class="tool" data-tool="eyedrop" title="Eyedropper (I)"><svg data-icon="dropper"></svg><span>Dropper</span><kbd>I</kbd></button>
+          </div>
+          <div class="tool-page hidden" id="toolPageShape" role="tabpanel" aria-labelledby="toolTabShape" data-tool-page="shape" aria-hidden="true">
+            <button class="tool" data-tool="line" title="Line"><svg data-icon="line"></svg><span>Line</span><kbd></kbd></button>
+            <button class="tool" data-tool="rect" title="Rectangle"><svg data-icon="rect"></svg><span>Rectangle</span><kbd></kbd></button>
+            <button class="tool" data-tool="ellipse" title="Ellipse shape"><svg data-icon="ellipse"></svg><span>Ellipse</span><kbd></kbd></button>
+            <button class="tool" data-tool="text" title="Text · click canvas to place (T)"><svg data-icon="type"></svg><span>Text</span><kbd>T</kbd></button>
+          </div>
+        </div>
+      </div>
+      <div class="rail-bottom"><button class="tool compact" id="helpBtn" title="Keyboard shortcuts"><svg data-icon="help"></svg><span>Shortcuts</span></button></div>
+    </aside>
+    <section class="editor-column">
+      <div class="document-tabs" id="tabs"><button class="doc-tab active"><span class="tab-dot"></span><span id="activeTabName">No frame open</span><span class="tab-close">×</span></button><button class="tab-add" id="browseBtn" title="Browse files"><svg data-icon="plus"></svg></button></div>
+      <div class="canvas-toolbar">
+        <div class="canvas-breadcrumb"><span>Canvas</span><span class="slash">/</span><strong id="canvasFrameName">—</strong><span class="dirty-dot" id="dirtyDot"></span></div>
+        <div class="canvas-tools">
+          <button class="icon-button" id="undoBtn" title="Undo"><svg data-icon="undo"></svg></button>
+          <button class="icon-button" id="redoBtn" title="Redo"><svg data-icon="redo"></svg></button>
+          <span class="small-divider"></span>
+          <button class="icon-button" id="fitBtn" title="Fit canvas"><svg data-icon="fit"></svg></button>
+          <span class="zoom-readout" id="zoomLabel">100%</span>
+          <button class="icon-button" id="zoomOutBtn" title="Zoom out"><svg data-icon="minus"></svg></button>
+          <input class="zoom-slider" id="zoomSlider" type="range" min="10" max="1600" value="100" aria-label="Canvas zoom">
+          <button class="icon-button" id="zoomInBtn" title="Zoom in"><svg data-icon="plus"></svg></button>
+          <span class="small-divider"></span>
+          <button class="icon-button" id="gridBtn" title="Toggle transparency grid"><svg data-icon="grid"></svg></button>
+          <button class="icon-button" id="bgBtn" title="Change preview background"><svg data-icon="sun"></svg></button>
+        </div>
+      </div>
+      <div class="canvas-workspace" id="canvasWorkspace">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-art"><div class="empty-checker"></div><div class="empty-sprite"><img src="./public/samples/palomin/000.png" alt=""></div><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></div>
+          <h1>A frame at a time.</h1>
+          <p>Open a sprite folder to edit frames, keep its metadata close, and preview the motion as you go.</p>
+          <div class="empty-actions"><button class="export-button" id="emptyOpen"><svg data-icon="folder"></svg><span>Open a folder</span></button><button class="quiet-button" id="loadSample"><svg data-icon="sparkle"></svg><span>Explore Palomin sample</span></button></div>
+          <span class="empty-footnote">Runs locally in your browser · your files stay on this device</span>
+        </div>
+        <div class="stage-shell hidden" id="stageShell">
+          <div class="stage-checker" id="stageChecker"><canvas id="artCanvas" width="256" height="256"></canvas><canvas class="selection-overlay" id="selectionOverlay" aria-hidden="true"></canvas><div class="brush-cursor" id="brushCursor" aria-hidden="true"></div><div class="selection-box hidden" id="selectionBox"></div></div>
+        </div>
+        <div class="canvas-hint" id="canvasHint"><span class="hint-key">H</span> Hand drag <span class="hint-sep">·</span><span class="hint-key">Space</span> + drag <span class="hint-sep">·</span><span class="hint-key">Ctrl + wheel</span> zoom</div>
+      </div>
+      <section class="timeline">
+        <div class="timeline-head">
+          <div class="timeline-title"><svg data-icon="film"></svg><strong>Animation</strong><span class="frame-count" id="timelineCount">0 frames</span></div>
+          <div class="timeline-actions">
+            <select id="sequenceSelect" aria-label="Animation sequence"><option value="all">All frames</option></select>
+            <button class="icon-button play-button" id="playBtn" title="Play animation"><svg data-icon="play"></svg></button>
+            <label class="fps-control"><span>FPS</span><input id="fpsInput" type="number" min="1" max="60" value="24"></label>
+            <button class="icon-button" id="onionBtn" title="Toggle onion skin"><svg data-icon="onion"></svg></button>
+            <button class="icon-button" id="timelineToggle" title="Collapse timeline"><svg data-icon="chevron"></svg></button>
+          </div>
+        </div>
+        <div class="filmstrip-wrap" id="filmstripWrap"><div class="filmstrip" id="filmstrip"><div class="filmstrip-empty">Open a folder to see frames in the timeline</div></div></div>
+        <div class="timeline-foot"><span id="sequenceLabel">Ready for your next frame</span><span class="timeline-range" id="rangeLabel"></span></div>
+      </section>
+    </section>
+    <aside class="inspector">
+      <div class="inspector-tabs"><button class="inspector-tab active" data-panel="layers">Layers</button><button class="inspector-tab" data-panel="properties">Properties</button><button class="inspector-tab" data-panel="info">Info</button></div>
+      <div class="panel-content" id="layersPanel">
+        <div class="panel-heading"><div><h2>Layers</h2><span id="layerSummary">0 in frame</span></div><button class="icon-button add-layer" id="addLayerBtn" title="Add transparent layer"><svg data-icon="plus"></svg></button></div>
+        <div class="layer-list" id="layerList"><div class="layer-placeholder">Open a frame to manage its layers.</div></div>
+        <div class="layer-controls">
+          <div class="control-label-row"><label for="opacitySlider">Opacity</label><span id="opacityValue">100%</span></div>
+          <input id="opacitySlider" type="range" min="0" max="100" value="100">
+          <div class="layer-quick-actions"><button id="renameLayerBtn"><svg data-icon="type"></svg>Rename</button><button id="deleteLayerBtn"><svg data-icon="trash"></svg>Delete</button></div>
+        </div>
+        <div class="panel-divider"></div>
+        <div class="panel-heading compact-heading"><div><h2>Color</h2><span>Foreground</span></div></div>
+        <div class="color-row"><label class="color-swatch"><input id="colorInput" type="color" value="#ef865d"><span id="colorChip"></span></label><div class="color-code"><span>HEX</span><input id="colorHex" value="#EF865D" maxlength="7" aria-label="Hex color"></div><button class="icon-button" id="swapColorBtn" title="Reset color"><svg data-icon="reset"></svg></button></div>
+        <div class="brush-control"><div class="control-label-row"><label for="sizeSlider">Brush / eraser size</label><span id="sizeValue">8 px</span></div><input id="sizeSlider" type="range" min="1" max="128" value="8"></div>
+        <div class="wand-options"><div class="control-label-row"><label for="wandTolerance">Magic Wand tolerance</label><span id="wandToleranceValue">20</span></div><input id="wandTolerance" type="range" min="0" max="128" value="20"><div class="control-label-row selection-control"><label for="selectionFeather">Selection feather</label><span id="selectionFeatherValue">0 px</span></div><input id="selectionFeather" type="range" min="0" max="16" value="0"><label class="selection-check"><input id="selectionAntialias" type="checkbox" checked><span>Anti-aliased edges</span></label><div class="control-label-row selection-control"><label for="magneticRadius">Magnetic snap radius</label><span id="magneticRadiusValue">8 px</span></div><input id="magneticRadius" type="range" min="2" max="32" value="8"><p class="microcopy">Shift adds to a selection; Alt subtracts. Lasso tools close the path when released.</p></div>
+        <div class="control-label-row fill-label"><label for="fillMode">Shape style</label></div>
+        <div class="segmented" id="fillMode"><button class="selected" data-mode="stroke">Outline</button><button data-mode="fill">Fill</button></div>
+      </div>
+      <div class="panel-content hidden" id="propertiesPanel">
+        <div class="panel-heading"><div><h2>Frame</h2><span>Image properties</span></div></div>
+        <div class="panel-divider"></div><div class="panel-heading compact-heading"><div><h2>Text</h2><span>Editable text layers</span></div></div><label class="text-field-label" for="textContent">Text content</label><textarea id="textContent" class="text-content" rows="3" placeholder="Choose the Text tool and click the canvas"></textarea><div class="text-style-row"><label>Font<select id="textFont"><option value="Arial">Arial</option><option value="Georgia">Georgia</option><option value="Trebuchet MS">Trebuchet</option><option value="Impact">Impact</option><option value="monospace">Monospace</option></select></label><label>Size<input id="textSize" type="number" min="1" max="512" value="32"></label></div><div class="text-style-row"><label>Text color<input id="textColor" type="color" value="#ef865d"></label><label>Align<select id="textAlign"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></label><label class="text-check"><input id="textBold" type="checkbox">Bold</label><label class="text-check"><input id="textItalic" type="checkbox">Italic</label></div><button class="wide-quiet" id="applyTextBtn"><svg data-icon="type"></svg>Add text layer</button><p class="microcopy">To replace text already baked into a PNG, remove its pixels first, then add a new text layer.</p>
+        <div class="property-card"><div class="property-row"><span>Filename</span><strong id="propName">—</strong></div><div class="property-row"><span>Dimensions</span><strong id="propDimensions">—</strong></div><div class="property-row"><span>Color mode</span><strong>RGBA · transparent</strong></div><div class="property-row"><span>File size</span><strong id="propSize">—</strong></div></div>
+        <div class="panel-divider"></div>
+        <div class="panel-heading compact-heading"><div><h2>Transform</h2><span>Apply to this frame</span></div></div>
+        <div class="transform-grid"><button id="rotateLeft"><svg data-icon="rotate"></svg>Rotate left</button><button id="rotateRight"><svg data-icon="rotate-right"></svg>Rotate right</button><button id="flipH"><svg data-icon="flip-h"></svg>Flip horizontal</button><button id="flipV"><svg data-icon="flip-v"></svg>Flip vertical</button></div>
+        <button class="wide-quiet" id="fillSelectionBtn"><svg data-icon="fill"></svg>Fill selected pixels</button><button class="wide-quiet" id="cutSelectionBtn"><svg data-icon="eraser"></svg>Remove selected pixels</button><div class="edge-cleanup"><div class="edge-heading"><strong>Auto-clean edges</strong><span>Works inside the selection</span></div><div class="control-label-row"><label for="speckSlider">Remove flecks up to</label><span id="speckValue">3 px</span></div><input id="speckSlider" type="range" min="1" max="12" value="3"><button class="wide-quiet" id="cleanEdgesBtn"><svg data-icon="sparkle"></svg>Clean selected region</button><p class="microcopy">Remove detached alpha specks and soften existing translucent edge pixels.</p></div><button class="wide-quiet" id="cropSelectionBtn"><svg data-icon="crop"></svg>Crop to selection</button>
+        <p class="microcopy">Transformations affect the active frame. Export keeps every original filename and folder path.</p>
+      </div>
+      <div class="panel-content hidden" id="infoPanel">
+        <div class="panel-heading"><div><h2>Project info</h2><span>Folder and metadata</span></div></div>
+        <div class="property-card"><div class="property-row"><span>Frames</span><strong id="infoFrames">0</strong></div><div class="property-row"><span>JSON file</span><strong id="infoJson">Not detected</strong></div><div class="property-row"><span>Default rate</span><strong id="infoFps">24 fps</strong></div><div class="property-row"><span>Atlas grid</span><strong id="infoGrid">—</strong></div></div>
+        <div class="panel-divider"></div>
+        <div class="metadata-title">Metadata preview</div><pre id="metadataPreview" class="metadata-preview">Import a folder containing PNG frames and a JSON file to see its metadata.</pre>
+        <button class="wide-quiet" id="downloadJsonBtn"><svg data-icon="export"></svg>Download source JSON</button>
+      </div>
+    </aside>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop hidden" id="helpModal"><div class="help-dialog"><div class="help-head"><h2>Keyboard shortcuts</h2><button class="icon-button" id="closeHelp" aria-label="Close"><svg data-icon="close"></svg></button></div><div class="shortcut-list"><span>Move</span><kbd>V</kbd><span>Hand / pan</span><kbd>H</kbd><span>Zoom in / out</span><kbd>Ctrl + = / -</kbd><span>Magic Wand</span><kbd>W</kbd><span>Rectangle / ellipse select</span><kbd>M / Shift+M</kbd><span>Lasso / Polygon / Magnetic</span><kbd>L / Shift+L</kbd><span>Text</span><kbd>T</kbd><span>Crop</span><kbd>C</kbd><span>Pencil / brush</span><kbd>B</kbd><span>Eraser</span><kbd>E</kbd><span>Bucket</span><kbd>G</kbd><span>Dropper</span><kbd>I</kbd><span>Undo / redo</span><kbd>Ctrl Z / Ctrl Shift Z</kbd><span>Play / pause</span><kbd>Space</kbd></div></div></div>
+</div>
+<script src="./app.js"></script>
+</body></html>
+
+
+
