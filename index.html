@@ -33,7 +33,7 @@
         </div>
         <div class="tool-pages">
           <div class="tool-page" id="toolPageCanvas" role="tabpanel" aria-labelledby="toolTabCanvas" data-tool-page="canvas">
-            <button class="tool active" data-tool="move" title="Move (V)"><svg data-icon="move"></svg><span>Move</span><kbd>V</kbd></button>
+            <button class="tool active" data-tool="move" title="Move layer (V); drag pans at zoom, Alt+drag moves the layer"><svg data-icon="move"></svg><span>Move</span><kbd>V</kbd></button>
             <button class="tool" data-tool="hand" title="Hand / pan (H)"><svg data-icon="hand"></svg><span>Hand</span><kbd>H</kbd></button>
             <button class="tool" data-tool="crop" title="Crop selection (C)"><svg data-icon="crop"></svg><span>Crop</span><kbd>C</kbd></button>
           </div>
@@ -92,7 +92,7 @@
         <div class="stage-shell hidden" id="stageShell">
           <div class="stage-checker" id="stageChecker"><canvas id="artCanvas" width="256" height="256"></canvas><canvas class="selection-overlay" id="selectionOverlay" aria-hidden="true"></canvas><div class="brush-cursor" id="brushCursor" aria-hidden="true"></div><div class="selection-box hidden" id="selectionBox"></div></div>
         </div>
-        <div class="canvas-hint" id="canvasHint"><span class="hint-key">H</span> Hand drag <span class="hint-sep">·</span><span class="hint-key">Space</span> + drag <span class="hint-sep">·</span><span class="hint-key">Ctrl + wheel</span> zoom</div>
+        <div class="canvas-hint" id="canvasHint"><span class="hint-key">Drag</span> Pan at zoom <span class="hint-sep">·</span><span class="hint-key">Alt</span> + drag moves layer <span class="hint-sep">·</span><span class="hint-key">Space</span> + drag</div>
       </div>
       <section class="timeline">
         <div class="timeline-head">

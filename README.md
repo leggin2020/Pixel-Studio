@@ -40,7 +40,7 @@ La exportación aplana las capas visibles de cada cuadro en su PNG final. No sob
 
 ## Herramientas y funciones
 
-- **Dibujo:** mover capas, mano para desplazar el lienzo, lápiz, pincel, borrador circular con tamaño ajustable, cubo de pintura, cuentagotas, línea, rectángulo y elipse con modos de contorno o relleno.
+- **Dibujo:** mover capas con Alt + arrastre al ampliar, arrastrar para desplazar el lienzo ampliado, mano para desplazar el lienzo, lápiz, pincel, borrador circular con tamaño ajustable, cubo de pintura, cuentagotas, línea, rectángulo y elipse con modos de contorno o relleno.
 - **Selección:** rectangular, elíptica, lazo libre, lazo poligonal y lazo magnético, además de varita mágica con tolerancia. Las selecciones admiten antialias, desvanecimiento y modificadores para sumar o restar áreas.
 - **Limpieza y recorte:** herramienta de suavizado por región para eliminar motas pequeñas y suavizar bordes alfa; recorte a la región seleccionada; quitar o rellenar píxeles seleccionados.
 - **Texto:** crea capas de texto con contenido, familia tipográfica, tamaño, color, alineación y estilos negrita o cursiva. El texto añadido se puede volver a editar mientras permanezca como su propia capa.
