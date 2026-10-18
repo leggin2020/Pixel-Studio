@@ -41,7 +41,8 @@ La exportación aplana las capas visibles de cada cuadro en su PNG final. No sob
 ## Herramientas y funciones
 
 - **Dibujo:** mover capas con Alt + arrastre al ampliar, arrastrar para desplazar el lienzo ampliado, mano para desplazar el lienzo, lápiz, pincel, borrador circular con tamaño ajustable, cubo de pintura, cuentagotas, línea, rectángulo y elipse con modos de contorno o relleno.
-- **Selección:** rectangular, elíptica, lazo libre, lazo poligonal y lazo magnético, además de varita mágica con tolerancia. Las selecciones admiten antialias, desvanecimiento y modificadores para sumar o restar áreas.
+- **Selección:** rectangular, elíptica, lazo libre, lazo poligonal y lazo magnético, además de varita mágica con tolerancia. El borde activo se indica con una línea discontinua animada de alto contraste. Los rectángulos y las elipses dibujados, así como los trazos cerrados con lápiz o pincel, también pasan a ser selecciones. Las selecciones admiten antialias, desvanecimiento y modificadores para sumar o restar áreas.
+- **Atajos de selección:** `Ctrl+A` selecciona todo el lienzo; `Ctrl+D` desactiva la selección; `Ctrl+Shift+D` la restaura; y `Ctrl+S` también restaura la última selección desactivada, según el flujo solicitado para Sprite-Studio.
 - **Previsualización:** líneas, formas, trazos y contornos de selección muestran una guía temporal de alto contraste con bordes claros y oscuros para distinguirla sobre el tablero transparente y fondos claros u oscuros.
 - **Limpieza y recorte:** herramienta de suavizado por región para eliminar motas pequeñas y suavizar bordes alfa; recorte a la región seleccionada; quitar o rellenar píxeles seleccionados.
 - **Texto:** crea capas de texto con contenido, familia tipográfica, tamaño, color, alineación y estilos negrita o cursiva. El texto añadido se puede volver a editar mientras permanezca como su propia capa.
